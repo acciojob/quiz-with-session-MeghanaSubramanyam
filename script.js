@@ -53,4 +53,24 @@ function renderQuestions() {
     questionsElement.appendChild(questionElement);
   }
 }
+function saveProgress(questionIndex,seletedAnswer){
+	userAnswers[questionIndex]=seletedAnswer;
+	sessionStorage.setItem("progress",JSON.stringify(userAnswers));
+	
+}
+funciton score(){
+	let score=0;
+	for(let i=0;i<questions.length;i++){
+		if(userAnswers[i]===questions[i].answer){
+			score++
+		}
+	}
+	return score
+}
+
+submitButton.addEventListener("click",()=>{
+	const score=score();
+	scoreElement.textContent=`Your score is ${score} out of 5.`;
+	localStorage.setItem("score",score);
+})
 renderQuestions();
